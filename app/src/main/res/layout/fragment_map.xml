@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.map.MapFragment">
+
+    <LinearLayout
+        android:id="@+id/MAP_CONTAINER"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical" />
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <ImageView
+            android:layout_weight="1"
+            android:src="@drawable/ic_baseline_account_circle_24"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:contentDescription="TODO" />
+
+        <ImageView
+            android:layout_weight="1"
+            android:src="@drawable/ic_baseline_account_circle_24"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:contentDescription="TODO" />
+
+        <ImageView
+            android:layout_weight="1"
+            android:src="@drawable/ic_baseline_account_circle_24"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:contentDescription="TODO" />
+    </LinearLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
