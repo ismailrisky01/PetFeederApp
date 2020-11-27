@@ -1,5 +1,6 @@
 package com.example.petfeederapp.ui.map
 
+import android.location.Location
 import androidx.fragment.app.Fragment
 
 import android.os.Bundle
@@ -7,15 +8,29 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.petfeederapp.R
+import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationCallback
+import com.google.android.gms.location.LocationRequest
 
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
 
 class MapsFragment : Fragment() {
+    private var latitude: Double = 0.toDouble()
+    private var longitude: Double = 0.toDouble()
+
+    private lateinit var mLastLocation: Location
+    private var mMarker: Marker? = null
+
+    //Location
+    lateinit var fusedLocationProvicderClient: FusedLocationProviderClient
+    lateinit var locationRequest : LocationRequest
+    lateinit var locationCallback: LocationCallback
 
     private val callback = OnMapReadyCallback { googleMap ->
         /**

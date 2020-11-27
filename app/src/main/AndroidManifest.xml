@@ -7,6 +7,9 @@
          location permissions for the "MyLocation" functionality.
     -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.hardware.camera" />
+    <uses-permission android:name="android.hardware.camera.autofocus" />
 
     <application
         android:allowBackup="true"
@@ -15,7 +18,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.PetFeederApp">
-        <activity android:name=".ui.auth.AuthActivity"></activity>
+        <activity android:name=".library.ScannerQr"></activity>
+        <activity android:name=".ui.auth.AuthActivity" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -28,16 +32,17 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
 
+
         <activity
-            android:name=".ui.DashboardActivity"
-            android:label="@string/title_activity_dashboard" />
-        <activity android:name=".MainActivity">
+            android:name=".ui.MainActivity"
+            android:label="@string/title_activity_dashboard" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
     </application>
 
 </manifest>
