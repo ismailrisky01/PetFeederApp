@@ -39,7 +39,7 @@ class SettingFragment : OptionMenu() {
             observe()
         }
     }
-    private fun observe() {
+     fun observe() {
         settingMainView.getDeviceData().observe(viewLifecycleOwner, Observer {data->
             hideProgressBar()
             adapter.setListData(data)

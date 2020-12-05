@@ -2,6 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:background="@drawable/ic_background"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.setting.detail.DetailSettingFragment">
@@ -15,32 +16,56 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
     <androidx.cardview.widget.CardView
+        app:cardCornerRadius="20dp"
+        android:layout_margin="20dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <LinearLayout
-            android:orientation="vertical"
+            android:padding="20dp"
+            android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-        <TextView
-            android:text="ID"
-            android:id="@+id/txtId"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-            <TextView
-                android:text="Nama"
-                android:id="@+id/txtNama"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:text="ID"
+                    android:id="@+id/txtId"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+                <TextView
+                    android:text="Nama"
+                    android:textColor="@color/black"
+                    android:textSize="20dp"
+                    android:textStyle="bold"
+                    android:id="@+id/txtNama"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
 
-            <Button
-            android:text="FeedNow"
-            android:clickable="true"
-            android:id="@+id/btnSetNow"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+
+                <Button
+                    android:text="FeedNow"
+                    android:clickable="true"
+                    android:id="@+id/btnSetNow"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:src="@drawable/ic_setting"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"/>
+            </LinearLayout>
+
         </LinearLayout>
     </androidx.cardview.widget.CardView>
         <GridLayout
+            android:padding="20dp"
             android:id="@+id/GridLayoutt"
             android:columnCount="2"
             android:rowCount="3"
@@ -66,8 +91,15 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"/>
                     <TextView
+
+                        android:layout_gravity="center"
+                        android:textAlignment="center"
+                        android:textSize="40dp"
+                        android:text="08:30"
+                        android:textStyle="bold"
+                        android:textColor="#466EB6"
                         android:id="@+id/txtDate1"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"/>
 
 
@@ -95,7 +127,12 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"/>
                     <TextView
-                        android:text=""
+                        android:layout_gravity="center"
+                        android:textAlignment="center"
+                        android:textSize="40dp"
+                        android:textStyle="bold"
+                        android:text="08:30"
+                        android:textColor="#466EB6"
                         android:id="@+id/txtDate2"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"/>
@@ -124,7 +161,12 @@
                         android:layout_height="wrap_content"/>
                     <TextView
                         android:id="@+id/txtDate3"
-                        android:text=""
+                        android:layout_gravity="center"
+                        android:textAlignment="center"
+                        android:textSize="40dp"
+                        android:textStyle="bold"
+                        android:text="08:30"
+                        android:textColor="#466EB6"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"/>
 
@@ -152,7 +194,12 @@
                         android:layout_height="wrap_content"/>
                     <TextView
                         android:id="@+id/txtDate4"
-                        android:text=""
+                        android:layout_gravity="center"
+                        android:textAlignment="center"
+                        android:textSize="40dp"
+                        android:textStyle="bold"
+                        android:text="08:30"
+                        android:textColor="#466EB6"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"/>
 
@@ -180,7 +227,12 @@
                         android:layout_height="wrap_content"/>
                     <TextView
                         android:id="@+id/txtDate5"
-                        android:text=""
+                        android:layout_gravity="center"
+                        android:textAlignment="center"
+                        android:textSize="40dp"
+                        android:text="08:30"
+                        android:textStyle="bold"
+                        android:textColor="#466EB6"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"/>
 
@@ -208,7 +260,12 @@
                         android:layout_height="wrap_content"/>
                     <TextView
                         android:id="@+id/txtDate6"
-                        android:text=""
+                        android:layout_gravity="center"
+                        android:textAlignment="center"
+                        android:textSize="40dp"
+                        android:textStyle="bold"
+                        android:text="08:30"
+                        android:textColor="#466EB6"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"/>
 
@@ -216,6 +273,18 @@
 
             </androidx.cardview.widget.CardView>
         </GridLayout>
+    </LinearLayout>
+    <LinearLayout
+        android:visibility="gone"
+        android:orientation="vertical"
+        android:id="@+id/Detail_Container_empty"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <ImageView
+            android:src="@drawable/ic_shit"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -10,6 +10,7 @@ import androidx.core.app.ActivityCompat
 import androidx.lifecycle.ViewModelProvider
 import com.example.petfeederapp.R
 import com.example.petfeederapp.model.DeviceData
+import com.example.petfeederapp.ui.setting.SettingFragment
 import com.example.petfeederapp.ui.setting.SettingViewModel
 import com.google.firebase.auth.FirebaseAuth
 import com.google.zxing.BarcodeFormat
@@ -56,8 +57,8 @@ class ScannerQr : AppCompatActivity(), ZXingScannerView.ResultHandler {
             Toast.makeText(this, p0.text, Toast.LENGTH_LONG).show()
             val user = FirebaseAuth.getInstance().currentUser!!.uid
             settingMainView.addDeviceData(user, DeviceData(p0.text,"Name Not Set"))
-
             finish()
+
             
         }
     }

@@ -31,7 +31,7 @@ class MainActivity : AppCompatActivity() {
         val user = FirebaseAuth.getInstance().currentUser
         if (user != null) {
             val appBarConfiguration = AppBarConfiguration(setOf(
-                R.id.navigation_home, R.id.navigation_dashboard, R.id.navigation_notifications, R.id.mapFragment, R.id.accountFragment))
+                R.id.navigation_home, R.id.navigation_dashboard, R.id.navigation_notifications, R.id.accountFragment))
             setupActionBarWithNavController(navController, appBarConfiguration)
             navView.setupWithNavController(navController)
         } else {

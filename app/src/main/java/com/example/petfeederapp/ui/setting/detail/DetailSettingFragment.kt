@@ -1,5 +1,6 @@
 package com.example.petfeederapp.ui.setting.detail
 
+import android.app.TimePickerDialog
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -24,12 +25,16 @@ import com.google.firebase.database.ValueEventListener
 import kotlinx.android.synthetic.main.fragment_detail_setting.*
 import kotlinx.coroutines.GlobalScope
 import java.lang.ArithmeticException
+import java.text.SimpleDateFormat
+import java.util.*
 
 
-class DetailSettingFragment : Fragment(), View.OnClickListener {
+class DetailSettingFragment : FunSetting(), View.OnClickListener {
+    var kodeID:String=""
     private val DetailMainView by lazy {
         ViewModelProvider(this).get(DetailViewModel::class.java)
     }
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -41,25 +46,39 @@ class DetailSettingFragment : Fragment(), View.OnClickListener {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+        setUp()
+Observe()
+
+    }
+fun Observe(){
+    GlobalScope.apply {
+        kodeID = arguments?.getString("id").toString()
+        DetailMainView.getDeviceDataRealtime(kodeID).observe(viewLifecycleOwner, Observer { data ->
+            updateUI(data[0])
+        })
+    }
+}
+
+    fun setUp() {
         swt1.setOnClickListener(this)
         swt2.setOnClickListener(this)
         swt3.setOnClickListener(this)
         swt4.setOnClickListener(this)
         swt5.setOnClickListener(this)
         swt6.setOnClickListener(this)
+        txtDate1.setOnClickListener(this)
+        txtDate1.setOnClickListener(this)
+        txtDate1.setOnClickListener(this)
+        txtDate1.setOnClickListener(this)
+        txtDate1.setOnClickListener(this)
+        txtDate1.setOnClickListener(this)
         btnSetNow.setOnClickListener(this)
-
-        GlobalScope.apply {
-            val id = arguments?.getString("id").toString()
-            DetailMainView.getDeviceDataRealtime(id).observe(viewLifecycleOwner, Observer { data ->
-                updateUI(data[0])
-            })
-        }
-       }
+    }
 
     fun updateUI(device: Device) {
         if (device.id == "") {
             Detail_Container.visibility = View.GONE
+            Detail_Container_empty.visibility=View.VISIBLE
         } else {
             txtId.text = device.id
             txtDate1.text = device.jam.jam1
@@ -78,45 +97,137 @@ class DetailSettingFragment : Fragment(), View.OnClickListener {
     }
 
 
-    fun update() {
-        val id = txtId.text.toString()
-        val jam1 = txtDate1.text.toString()
-        val jam2 = txtDate2.text.toString()
-        val jam3 = txtDate3.text.toString()
-        val jam4 = txtDate4.text.toString()
-        val jam5 = txtDate5.text.toString()
-        val jam6 = txtDate6.text.toString()
-        val jamNow = false
-        val statusjam1 = swt1.showText
-        val statusjam2 = swt2.showText
-        val statusjam3 = swt3.showText
-        val statusjam4 = swt4.showText
-        val statusjam5 = swt5.showText
-        val statusjam6 = swt6.showText
-        val data = Device(
-            id,
-            Jam(
-                jam1,
-                jam2,
-                jam3,
-                jam4,
-                jam5,
-                jam6,
-                jamNow,
-                statusjam1,
-                statusjam2,
-                statusjam3,
-                statusjam4,
-                statusjam5,
-                statusjam6
-            )
-        )
-        DetailMainView
-    }
 
     override fun onClick(p0: View?) {
         when (p0?.id) {
             R.id.btnSetNow -> DetailMainView.updateSetNow(txtId.text.toString())
+            R.id.txtDate1-> setText1()
+            R.id.txtDate2->setText2()
+            R.id.txtDate3->setText3()
+            R.id.txtDate4->setText4()
+            R.id.txtDate5->setText5()
+            R.id.txtDate6->setText6()
+            R.id.swt1->setSwitch1()
         }
+    }
+
+    fun setSwitch1(){
+        FirebaseDatabase.getInstance().reference.child("Kode").child(kodeID).child("jam")
+            .child("statusjam1").setValue(true)
+    }
+
+    fun setText1(){
+        val cal = Calendar.getInstance()
+        val timeSetListener = TimePickerDialog.OnTimeSetListener { timePicker, hour, minute ->
+            cal.set(Calendar.HOUR_OF_DAY, hour)
+            cal.set(Calendar.MINUTE, minute)
+            val time = SimpleDateFormat("HH:mm").format(cal.time)
+            txtDate1.text = SimpleDateFormat("HH:mm").format(cal.time)
+            FirebaseDatabase.getInstance().reference.child("Kode").child(kodeID).child("jam")
+                .child("jam1").setValue(time)
+            Observe()
+        }
+        TimePickerDialog(
+            requireContext(),
+            timeSetListener,
+            cal.get(Calendar.HOUR_OF_DAY),
+            cal.get(Calendar.MINUTE),
+            true
+        ).show()
+    }
+    fun setText2(){
+        val cal = Calendar.getInstance()
+        val timeSetListener = TimePickerDialog.OnTimeSetListener { timePicker, hour, minute ->
+            cal.set(Calendar.HOUR_OF_DAY, hour)
+            cal.set(Calendar.MINUTE, minute)
+            val time = SimpleDateFormat("HH:mm").format(cal.time)
+            txtDate2.text = SimpleDateFormat("HH:mm").format(cal.time)
+            FirebaseDatabase.getInstance().reference.child("Kode").child(kodeID).child("jam")
+                .child("jam2").setValue(time)
+            Observe()
+        }
+        TimePickerDialog(
+            requireContext(),
+            timeSetListener,
+            cal.get(Calendar.HOUR_OF_DAY),
+            cal.get(Calendar.MINUTE),
+            true
+        ).show()
+    }
+    fun setText3(){
+        val cal = Calendar.getInstance()
+        val timeSetListener = TimePickerDialog.OnTimeSetListener { timePicker, hour, minute ->
+            cal.set(Calendar.HOUR_OF_DAY, hour)
+            cal.set(Calendar.MINUTE, minute)
+            val time = SimpleDateFormat("HH:mm").format(cal.time)
+            txtDate3.text = SimpleDateFormat("HH:mm").format(cal.time)
+            FirebaseDatabase.getInstance().reference.child("Kode").child(kodeID).child("jam")
+                .child("jam3").setValue(time)
+            Observe()
+        }
+        TimePickerDialog(
+            requireContext(),
+            timeSetListener,
+            cal.get(Calendar.HOUR_OF_DAY),
+            cal.get(Calendar.MINUTE),
+            true
+        ).show()
+    }
+    fun setText4(){
+        val cal = Calendar.getInstance()
+        val timeSetListener = TimePickerDialog.OnTimeSetListener { timePicker, hour, minute ->
+            cal.set(Calendar.HOUR_OF_DAY, hour)
+            cal.set(Calendar.MINUTE, minute)
+            val time = SimpleDateFormat("HH:mm").format(cal.time)
+            txtDate4.text = SimpleDateFormat("HH:mm").format(cal.time)
+            FirebaseDatabase.getInstance().reference.child("Kode").child(kodeID).child("jam")
+                .child("jam4").setValue(time)
+            Observe()
+        }
+        TimePickerDialog(
+            requireContext(),
+            timeSetListener,
+            cal.get(Calendar.HOUR_OF_DAY),
+            cal.get(Calendar.MINUTE),
+            true
+        ).show()
+    }
+    fun setText5(){
+        val cal = Calendar.getInstance()
+        val timeSetListener = TimePickerDialog.OnTimeSetListener { timePicker, hour, minute ->
+            cal.set(Calendar.HOUR_OF_DAY, hour)
+            cal.set(Calendar.MINUTE, minute)
+            val time = SimpleDateFormat("HH:mm").format(cal.time)
+            txtDate5.text = SimpleDateFormat("HH:mm").format(cal.time)
+            FirebaseDatabase.getInstance().reference.child("Kode").child(kodeID).child("jam")
+                .child("jam5").setValue(time)
+            Observe()
+        }
+        TimePickerDialog(
+            requireContext(),
+            timeSetListener,
+            cal.get(Calendar.HOUR_OF_DAY),
+            cal.get(Calendar.MINUTE),
+            true
+        ).show()
+    }
+    fun setText6(){
+        val cal = Calendar.getInstance()
+        val timeSetListener = TimePickerDialog.OnTimeSetListener { timePicker, hour, minute ->
+            cal.set(Calendar.HOUR_OF_DAY, hour)
+            cal.set(Calendar.MINUTE, minute)
+            val time = SimpleDateFormat("HH:mm").format(cal.time)
+            txtDate6.text = SimpleDateFormat("HH:mm").format(cal.time)
+            FirebaseDatabase.getInstance().reference.child("Kode").child(kodeID).child("jam")
+                .child("jam6").setValue(time)
+            Observe()
+        }
+        TimePickerDialog(
+            requireContext(),
+            timeSetListener,
+            cal.get(Calendar.HOUR_OF_DAY),
+            cal.get(Calendar.MINUTE),
+            true
+        ).show()
     }
 }
